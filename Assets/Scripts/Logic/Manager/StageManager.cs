@@ -16,6 +16,9 @@ public class StageManager : MonoSingleton<StageManager>
     public SquareTile SelectedTile { get; private set; }
     public DObject SelectedObject { get; private set; }
 
+    private int _stageGoldReward;
+    public int StageGoldReward => _stageGoldReward;
+
     public IReadOnlyDictionary<int, Actor> UserActors  => _dicUserActor;
     public IReadOnlyDictionary<int, Actor> EnemyActors => _dicEnemyActor;
 
@@ -326,7 +329,11 @@ public class StageManager : MonoSingleton<StageManager>
                             monster.TakeDamage(dmgValue);
                             hitTarget.ReceiveHit(caster, () =>
                             {
-                                if (monster.IsDead) hitTarget.Die(() => CheckBattleResult());
+                                if (monster.IsDead)
+                                {
+                                    _stageGoldReward += monster.Data.Gold;
+                                    hitTarget.Die(() => CheckBattleResult());
+                                }
                             });
                         });
                     }
@@ -412,6 +419,7 @@ public class StageManager : MonoSingleton<StageManager>
 
         if (!allEnemiesDead && !allUsersDead) return;
 
+        if (allEnemiesDead) _stageGoldReward += 100;
         onBattleEnd?.Invoke(allEnemiesDead);
     }
 
@@ -431,6 +439,7 @@ public class StageManager : MonoSingleton<StageManager>
     {
         _dicUserActor.Clear();
         _dicEnemyActor.Clear();
+        _stageGoldReward = 0;
         _reachableTiles.Clear();
         _cardRangeTiles.Clear();
         _radiusPreviewTiles.Clear();

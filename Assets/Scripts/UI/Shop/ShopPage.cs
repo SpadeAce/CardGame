@@ -40,7 +40,7 @@ public class ShopPage : PageView
 
     private void RefreshGoods()
     {
-        _textGoods.text = DeckManager.Instance.Gold.ToString("N0");
+        _textGoods.text = PlayerManager.Instance.Gold.ToString("N0");
     }
 
     private void RefreshItems()

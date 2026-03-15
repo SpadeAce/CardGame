@@ -155,6 +155,7 @@ message MonsterData {
   int32 sight = 10;  // 시야
   string prefabPath = 11;  // 리소스경로
   string projectilePath = 12;  // 투사체 리소스 경로
+  int32 gold = 13;  // 획득 골드
 }
 
 message MonsterDataTable {
@@ -200,6 +201,17 @@ message ShopData {
 
 message ShopDataTable {
   repeated ShopData items = 1;
+}
+
+message StagePresetData {
+  int32 id = 1;  // 효과 고유 ID
+  string idAlias = 2;
+  int32 level = 3;  // 레벨
+  repeated string presetPath = 4;
+}
+
+message StagePresetDataTable {
+  repeated StagePresetData items = 1;
 }
 
 message TextData {

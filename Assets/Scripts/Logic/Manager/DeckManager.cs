@@ -43,21 +43,6 @@ public class DeckManager : MonoSingleton<DeckManager>
     private readonly List<DCard> _cardPool = new();
     private readonly List<DCard> _discardPool = new();
 
-    private int _gold = 1000;
-    public int Gold => _gold;
-
-    public bool SpendGold(int amount)
-    {
-        if (_gold < amount) return false;
-        _gold -= amount;
-        return true;
-    }
-
-    public void AddGold(int amount)
-    {
-        _gold += amount;
-    }
-
     public void AddCard(DCard card)
     {
         _deckCardList.Add(card);

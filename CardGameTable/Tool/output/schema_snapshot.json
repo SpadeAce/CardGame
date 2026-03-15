@@ -220,6 +220,11 @@
       "field_name": "projectilePath",
       "field_number": 12,
       "field_type": "string"
+    },
+    {
+      "field_name": "gold",
+      "field_number": 13,
+      "field_type": "int32"
     }
   ],
   "NamePresetData": [
@@ -335,6 +340,28 @@
     {
       "field_name": "itemIdAlias",
       "field_number": 7,
+      "field_type": "string"
+    }
+  ],
+  "StagePresetData": [
+    {
+      "field_name": "id",
+      "field_number": 1,
+      "field_type": "int32"
+    },
+    {
+      "field_name": "idAlias",
+      "field_number": 2,
+      "field_type": "string"
+    },
+    {
+      "field_name": "level",
+      "field_number": 3,
+      "field_type": "int32"
+    },
+    {
+      "field_name": "presetPath",
+      "field_number": 4,
       "field_type": "string"
     }
   ],

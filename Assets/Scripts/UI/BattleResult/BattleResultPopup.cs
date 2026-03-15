@@ -7,7 +7,8 @@ public class BattleResultPopup : PopupView
 {
     public class BattleResultParam : ViewParam
     {
-        public bool isWin;    
+        public bool isWin;
+        public int goldReward;
     }
 
     #region Linker
@@ -36,6 +37,9 @@ public class BattleResultPopup : PopupView
     #region Events
     public void OnClickContinue()
     {
+        BattleResultParam resultParam = param as BattleResultParam;
+        PlayerManager.Instance.AddGold(resultParam.goldReward);
+        PlayerManager.Instance.IncrementLevel();
         SceneController.Instance.ChangeScene("LobbyScene");
     }
 

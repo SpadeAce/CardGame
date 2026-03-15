@@ -1,0 +1,527 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9139900df46fd5458bc1e009f0c04e4, type: 3}
+  m_Name: TileMapPreset_1_4
+  m_EditorClassIdentifier: Assembly-CSharp::TileMapPreset
+  width: 10
+  height: 10
+  tileSize: 1.05
+  turnLimit: 0
+  maxPawnCount: 0
+  tiles:
+  - position: {x: 0, y: 0}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 0, y: 1}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 0, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 7}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 8}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 0, y: 9}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 0}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 1, y: 1}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 1, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 7}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 8}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 1, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 0}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 2, y: 1}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 2, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 6}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 7}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 2, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 0}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 3, y: 1}
+    tileType: 1
+    spawnPoint: 1
+    spawnId: 1
+    entityId: 0
+  - position: {x: 3, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 5}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 6}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 7}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 3, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 1
+    entityId: 0
+  - position: {x: 4, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 5}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 6}
+    tileType: 3
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 7}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 4, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 5}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 6}
+    tileType: 2
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 7}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 5, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 1
+    entityId: 0
+  - position: {x: 6, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 7}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 6, y: 8}
+    tileType: 1
+    spawnPoint: 2
+    spawnId: 1
+    entityId: 0
+  - position: {x: 6, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 7}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 7, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 7}
+    tileType: 1
+    spawnPoint: 2
+    spawnId: 1
+    entityId: 0
+  - position: {x: 8, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 8, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 0}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 1}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 2}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 3}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 4}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 5}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 6}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 7}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 8}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  - position: {x: 9, y: 9}
+    tileType: 1
+    spawnPoint: 0
+    spawnId: 0
+    entityId: 0
+  edges:
+  - posA: {x: 9, y: 4}
+    posB: {x: 9, y: 5}
+    entityId: 1
+  - posA: {x: 8, y: 4}
+    posB: {x: 9, y: 4}
+    entityId: 1

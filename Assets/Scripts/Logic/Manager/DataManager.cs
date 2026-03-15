@@ -15,6 +15,7 @@ public class DataManager : Singleton<DataManager>
     public NamePresetTable NamePreset { get; private set; }
     public ShopTable Shop { get; private set; }
     public EquipmentDataTable Equipment { get; private set; }
+    public StagePresetTable StagePreset { get; private set; }
 
 
     public void LoadAll()
@@ -42,5 +43,8 @@ public class DataManager : Singleton<DataManager>
 
         Equipment = new EquipmentDataTable();
         Equipment.Load();
+
+        StagePreset = new StagePresetTable();
+        StagePreset.Load();
     }
 }

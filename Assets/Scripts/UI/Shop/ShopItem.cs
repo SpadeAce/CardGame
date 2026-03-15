@@ -35,7 +35,7 @@ public class ShopItem : MonoBehaviourEx
 
     public void OnClickBuy()
     {
-        if (!DeckManager.Instance.SpendGold(_cardData.Price)) return;
+        if (!PlayerManager.Instance.SpendGold(_cardData.Price)) return;
         var card = new DCard(_cardData);
         DeckManager.Instance.AddCard(card);
         gameObject.SetActive(false);

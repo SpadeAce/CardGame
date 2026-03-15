@@ -40,7 +40,7 @@ public class RecruitItem : MonoBehaviourEx
 
     public void OnClickRecruit()
     {
-        if (!DeckManager.Instance.SpendGold(RecruitPrice)) return;
+        if (!PlayerManager.Instance.SpendGold(RecruitPrice)) return;
         PawnManager.Instance.AddPawn(_pawn);
         OnRecruited?.Invoke(this, _pawn);
     }

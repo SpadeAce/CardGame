@@ -131,7 +131,6 @@ public class StagePage : PageView
 
         GameObject cardIconPrefab = Resources.Load<GameObject>("Prefabs/UI/HUD/BattleCard");
 
-        float cardStartPosition = (float)(cardList.Count * 100) * 0.5f;
         for (int i = 0; i < cardList.Count; i++)
         {
             if (cardIconList.Count > i)
@@ -145,7 +144,7 @@ public class StagePage : PageView
                 existing.OnDragEnd   += OnCardDragEnd;
 
                 existing.gameObject.SetActive(true);
-                existing.transform.localPosition = Vector3.right * (-cardStartPosition + (100 * i));
+                existing.transform.localPosition = Vector3.right * (100 * i);
                 existing.SetData(cardList[i]);
                 existing.SetDisabled(selectedPawn != null && (!TurnManager.Instance.HasEnoughSharedActingPower(cardList[i].Data.EnergyCost) || !selectedPawn.HasEnoughAmmo(cardList[i].Data.AmmoCost)));
             }
@@ -155,7 +154,7 @@ public class StagePage : PageView
                 BattleCard card = cardObject.GetComponent<BattleCard>();
                 card.transform.SetParent(_goCardGroup.transform, false);
                 card.transform.localScale = Vector3.one;
-                card.transform.localPosition = Vector3.right * (-cardStartPosition + (100 * i));
+                card.transform.localPosition = Vector3.right * (100 * i);
                 card.SetData(cardList[i]);
                 card.SetDisabled(selectedPawn != null && (!TurnManager.Instance.HasEnoughSharedActingPower(cardList[i].Data.EnergyCost) || !selectedPawn.HasEnoughAmmo(cardList[i].Data.AmmoCost)));
 
@@ -196,8 +195,6 @@ public class StagePage : PageView
 
         List<DCard> pawnCards = newPawn.PawnHandCards;
         GameObject prefab = Resources.Load<GameObject>("Prefabs/UI/HUD/BattleCard");
-        float startX = pawnCards.Count * 100 * 0.5f;
-
         for (int i = 0; i < pawnCards.Count; i++)
         {
             BattleCard icon;
@@ -223,7 +220,7 @@ public class StagePage : PageView
                 icon.OnDragEnd   += OnCardDragEnd;
                 _pawnCardIconList.Add(icon);
             }
-            icon.transform.localPosition = Vector3.right * (-startX + (100 * i));
+            icon.transform.localPosition = Vector3.right * (100 * i);
             icon.SetData(pawnCards[i]);
             icon.SetDisabled(!TurnManager.Instance.HasEnoughSharedActingPower(pawnCards[i].Data.EnergyCost) || !newPawn.HasEnoughAmmo(pawnCards[i].Data.AmmoCost));
         }
@@ -367,7 +364,11 @@ public class StagePage : PageView
 
     private void OnBattleEnd(bool isWin)
     {
-        UIManager.Instance.OpenView<BattleResultPopup>(new BattleResultPopup.BattleResultParam { isWin = isWin });
+        UIManager.Instance.OpenView<BattleResultPopup>(new BattleResultPopup.BattleResultParam
+        {
+            isWin = isWin,
+            goldReward = isWin ? StageManager.Instance.StageGoldReward : 0
+        });
     }
 
     // ── 버튼 핸들러 ───────────────────────────────────────────────────────

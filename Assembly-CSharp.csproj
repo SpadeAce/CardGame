@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\UI\Info\Preset\EnemyInfoPreset.cs" />
     <Compile Include="Assets\Scripts\Tile\TileEntity.cs" />
     <Compile Include="Assets\Scripts\Logic\Scene\Core\SceneController.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\PawnTable.cs" />
     <Compile Include="Assets\Scripts\UI\Lobby\LobbyPage.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\LobbyManager.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Assets\Scripts\UI\Option\Option_Information.cs" />
     <Compile Include="Assets\Scripts\Tile\EdgeTileKey.cs" />
     <Compile Include="Assets\Scripts\UI\Shop\ShopPage.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\TableData\StagePresetTable.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\TextTable.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\MonsterTable.cs" />
     <Compile Include="Assets\Scripts\Tile\EdgeTile.cs" />

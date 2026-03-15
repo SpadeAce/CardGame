@@ -18,7 +18,7 @@ public class StageScript : SceneBase
         _stagePage = UIManager.Instance.OpenView<StagePage>();
         _mainCamera = Camera.main ?? Camera.allCameras[0];
 
-        StageManager.Instance.LoadStage(_stagePreset);
+        StageManager.Instance.LoadStage(ResolveStagePreset());
         DeckManager.Instance.InitStage();
 
         foreach (var actor in StageManager.Instance.UserActors.Values)
@@ -33,6 +33,24 @@ public class StageScript : SceneBase
             cameraController.SetPivot(TileManager.Instance.GetMapCenter());
 
         TurnManager.Instance.StartGame();
+    }
+
+    private TileMapPreset ResolveStagePreset()
+    {
+        int level = PlayerManager.Instance.DifficultyLevel;
+        var presetData = DataManager.Instance.StagePreset.GetByLevel(level);
+        if (presetData != null && presetData.PresetPath.Count > 0)
+        {
+            string path = presetData.PresetPath[Random.Range(0, presetData.PresetPath.Count)];
+            var loaded = Resources.Load<TileMapPreset>(path);
+            if (loaded != null) return loaded;
+            Debug.LogWarning($"[StageScript] TileMapPreset not found at '{path}'. Using fallback.");
+        }
+        else
+        {
+            Debug.LogWarning($"[StageScript] No StagePreset for level {level}. Using fallback.");
+        }
+        return _stagePreset;
     }
 
     public override void OnExitScene()
