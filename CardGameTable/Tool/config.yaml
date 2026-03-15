@@ -1,0 +1,28 @@
+# ============================================================
+# Protobuf Unity Table Tool - Configuration
+# ============================================================
+
+# Path to protoc binary (relative to this config file's directory, i.e., Tool/)
+# Download from: https://github.com/protocolbuffers/protobuf/releases
+# Windows: place protoc.exe at ./tools/protoc.exe
+# Linux/Mac: place protoc binary at ./tools/protoc
+protoc_path: "./tools/protoc"
+
+# ── 멀티 파일 모드 (B안) ─────────────────────────────────────────
+# 스키마 파일 디렉터리: Proto_*.xlsx 파일들이 위치하는 폴더 (Tool/ 기준 상대경로)
+schema_dir: "../Table/Proto/"
+
+# 데이터 파일 디렉터리: 실제 데이터 *.xlsx 파일들이 위치하는 폴더
+data_dir: "../Table/"
+
+# ── 단일 파일 모드 (레거시) ───────────────────────────────────────
+# schema_dir / data_dir 대신 excel_path를 지정하면 단일 파일 모드로 동작
+# excel_path: "../Table/GameData.xlsx"
+
+# Unity 출력 경로 (Tool/ 기준 상대경로)
+unity_cs_output: "../../Assets/Scripts/Generated/"
+unity_bytes_output: "../../Assets/Resources/Data/"
+
+# Proto package명 (csharp_namespace 및 .proto 파일명에 사용)
+# 반드시 유효한 Python 식별자여야 합니다 (영문자, 숫자, 언더스코어만 허용)
+package_name: "GameData"

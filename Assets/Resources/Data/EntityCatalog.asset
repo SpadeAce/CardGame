@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b434910378508b41acbf3ca1e227d33, type: 3}
+  m_Name: EntityCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::EntityCatalog
+  entries:
+  - id: 1
+    displayName: Wall Half
+    category: 3
+    prefab: {fileID: 6356388860621304545, guid: 982a9bf581dd08e42a67141fb2dbb633, type: 3}
+    resourcePath: 
+  - id: 2
+    displayName: Wall Full
+    category: 3
+    prefab: {fileID: 7301332613741075591, guid: 9a070ce5966f25c4581605fdcceb4551, type: 3}
+    resourcePath: 
