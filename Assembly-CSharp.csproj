@@ -93,8 +93,10 @@
     <Compile Include="Assets\Scripts\UI\PawnManage\PawnManageEquipSlot.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\StageManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\EquipmentDataTable.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\TableData\StageRewardTable.cs" />
     <Compile Include="Assets\Scripts\UI\Option\OptionPopup.cs" />
     <Compile Include="Assets\Scripts\UI\PawnManage\PawnManagePage.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleResult\BattleResultItem.cs" />
     <Compile Include="Assets\Scripts\Tile\TileSlot.cs" />
     <Compile Include="Assets\Scripts\Core\Spawn.cs" />
     <Compile Include="Assets\Scripts\UI\BattleResult\BattleResultPopup.cs" />

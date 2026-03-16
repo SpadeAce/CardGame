@@ -37,6 +37,7 @@ enum TargetType {
   TARGET_TYPE_ENEMY = 2;  // 상대
   TARGET_TYPE_GROUND = 3;  // 지역
   TARGET_TYPE_ALLY = 4;  // 아군
+  TARGET_TYPE_EMPTY_GROUND = 5;  // 빈 지역
 }
 
 enum CardType {
@@ -228,6 +229,18 @@ message StagePresetData {
 
 message StagePresetDataTable {
   repeated StagePresetData items = 1;
+}
+
+message StageRewardData {
+  int32 id = 1;  // 효과 고유 ID
+  string idAlias = 2;
+  int32 level = 3;
+  repeated int32 cardId = 4;
+  repeated int32 cardProb = 6;
+}
+
+message StageRewardDataTable {
+  repeated StageRewardData items = 1;
 }
 
 message TextData {

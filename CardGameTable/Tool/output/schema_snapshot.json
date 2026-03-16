@@ -417,6 +417,38 @@
       "field_type": "string"
     }
   ],
+  "StageRewardData": [
+    {
+      "field_name": "id",
+      "field_number": 1,
+      "field_type": "int32"
+    },
+    {
+      "field_name": "idAlias",
+      "field_number": 2,
+      "field_type": "string"
+    },
+    {
+      "field_name": "level",
+      "field_number": 3,
+      "field_type": "int32"
+    },
+    {
+      "field_name": "cardId",
+      "field_number": 4,
+      "field_type": "int32"
+    },
+    {
+      "field_name": "cardIdAlias",
+      "field_number": 5,
+      "field_type": "string"
+    },
+    {
+      "field_name": "cardProb",
+      "field_number": 6,
+      "field_type": "int32"
+    }
+  ],
   "TextData": [
     {
       "field_name": "id",

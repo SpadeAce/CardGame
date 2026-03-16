@@ -17,6 +17,7 @@ public class DataManager : Singleton<DataManager>
     public EquipmentDataTable Equipment { get; private set; }
     public StagePresetTable StagePreset { get; private set; }
     public PawnGrowthTable PawnGrowth { get; private set; }
+    public StageRewardTable StageReward { get; private set; }
 
 
     public void LoadAll()
@@ -50,5 +51,8 @@ public class DataManager : Singleton<DataManager>
 
         PawnGrowth = new PawnGrowthTable();
         PawnGrowth.Load();
+
+        StageReward = new StageRewardTable();
+        StageReward.Load();
     }
 }
