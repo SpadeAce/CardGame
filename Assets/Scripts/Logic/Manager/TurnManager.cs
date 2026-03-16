@@ -100,6 +100,16 @@ public class TurnManager : MonoSingleton<TurnManager>
     public void OnActorMoved(Actor actor, int remaining) => _remainingMovement[actor] = remaining;
 
     /// <summary>
+    /// 이미 이동한 Actor의 잔여 이동력을 버프/디버프 만큼 보정한다.
+    /// 아직 이동하지 않은 Actor는 무시한다(GetEffectiveMovement가 pawn.Movement를 직접 읽음).
+    /// </summary>
+    public void AdjustRemainingMovement(Actor actor, int delta)
+    {
+        if (_remainingMovement.TryGetValue(actor, out int current))
+            _remainingMovement[actor] = UnityEngine.Mathf.Max(0, current + delta);
+    }
+
+    /// <summary>
     /// 이번 턴에 이동한 적 없으면 -1, 이동했으면 잔여 이동력을 반환한다.
     /// </summary>
     public int GetRemainingMovement(Actor actor)

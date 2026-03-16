@@ -26,6 +26,12 @@ public class DPawn : DObject
     public string CodeName {get; private set;}
     public string IconPath {get; private set;}
 
+    public int Level { get; private set; } = 0;
+    public int Exp   { get; private set; } = 0;
+
+    private readonly List<(GameData.StatusType type, int value)> _growthBonuses = new();
+    private readonly List<int> _growthCardIds = new();
+
     private readonly List<DEquipment> _equips = new List<DEquipment>();
     public IReadOnlyList<DEquipment> Equips => _equips;
 
@@ -45,7 +51,7 @@ public class DPawn : DObject
 
     private void RecalculateStats()
     {
-        Stats.Recalculate(Data, _equips);
+        Stats.Recalculate(Data, _equips, _growthBonuses);
         UpdateStatus();
         onStatsChanged?.Invoke();
     }
@@ -81,6 +87,8 @@ public class DPawn : DObject
         foreach (var equip in _equips)
             foreach (var cardId in equip.Data.CardId)
                 _pawnCardPool.Add(new DCard(cardId));
+        foreach (var cardId in _growthCardIds)
+            _pawnCardPool.Add(new DCard(cardId));
         ShufflePawnPool(_pawnCardPool);
     }
 
@@ -133,7 +141,7 @@ public class DPawn : DObject
         string nameAlias = DataManager.Instance.NamePreset.GetRandomName(); 
         CodeName = TextManager.Instance.Get(nameAlias);
         IconPath = $"Textures/Icon/Pawn/Pawn_Female";
-        Stats.Recalculate(Data, _equips);
+        Stats.Recalculate(Data, _equips, _growthBonuses);
         UpdateStatus();
     }
 
@@ -144,7 +152,7 @@ public class DPawn : DObject
         string nameAlias = DataManager.Instance.NamePreset.GetRandomName(); 
         CodeName = TextManager.Instance.Get(nameAlias);
         IconPath = $"Textures/Icon/Pawn/Pawn_Female";
-        Stats.Recalculate(Data, _equips);
+        Stats.Recalculate(Data, _equips, _growthBonuses);
         UpdateStatus();
     }
 
@@ -248,6 +256,31 @@ public class DPawn : DObject
             case CardEffectType.BuffMovement:
             case CardEffectType.DebuffMovement:
                 Movement = Mathf.Max(0, Movement + delta); break;
+        }
+    }
+
+    public void AddExp(int amount)
+    {
+        Exp += amount;
+        TryLevelUp();
+    }
+
+    private void TryLevelUp()
+    {
+        while (true)
+        {
+            var nextData = DataManager.Instance.PawnGrowth
+                .GetByClassLevel(Data.ClassType, Level + 1);
+            if (nextData == null || Exp < nextData.RequireExp) break;
+
+            Level++;
+            var types  = nextData.StatusType;
+            var values = nextData.StatusValue;
+            for (int i = 0; i < types.Count; i++)
+                _growthBonuses.Add((types[i], values[i]));
+            foreach (var cardId in nextData.CardId)
+                _growthCardIds.Add(cardId);
+            RecalculateStats();
         }
     }
 

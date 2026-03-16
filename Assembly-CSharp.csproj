@@ -145,6 +145,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\NamePresetTable.cs" />
     <Compile Include="Assets\Scripts\Core\Singleton.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\DeckManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\TableData\PawnGrowthTable.cs" />
     <Compile Include="Assets\Scripts\Core\PrefabLoader.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TextManager.cs" />
     <Compile Include="Assets\Scripts\Data\EnumContainer.cs" />

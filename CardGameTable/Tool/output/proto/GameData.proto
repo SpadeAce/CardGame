@@ -156,6 +156,7 @@ message MonsterData {
   string prefabPath = 11;  // 리소스경로
   string projectilePath = 12;  // 투사체 리소스 경로
   int32 gold = 13;  // 획득 골드
+  int32 exp = 14;  // 획득 경험치
 }
 
 message MonsterDataTable {
@@ -189,6 +190,21 @@ message PawnData {
 
 message PawnDataTable {
   repeated PawnData items = 1;
+}
+
+message PawnGrowthData {
+  int32 id = 1;  // 고유 ID
+  string idAlias = 2;  // Alias
+  ClassType classType = 3;  // 폰 타입 (Enum.xlsx 참조)
+  int32 level = 4;  // 레벨
+  int32 requireExp = 5;  // 요구 경험치
+  repeated StatusType statusType = 6;
+  repeated int32 statusValue = 7;
+  repeated int32 cardId = 8;
+}
+
+message PawnGrowthDataTable {
+  repeated PawnGrowthData items = 1;
 }
 
 message ShopData {

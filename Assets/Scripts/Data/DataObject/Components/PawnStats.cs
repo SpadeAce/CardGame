@@ -18,7 +18,8 @@ public class PawnStats
     public int Ammo     { get; private set; }
     public int CardCap  { get; private set; }
 
-    public void Recalculate(PawnData data, IReadOnlyList<DEquipment> equips)
+    public void Recalculate(PawnData data, IReadOnlyList<DEquipment> equips,
+        IReadOnlyList<(GameData.StatusType type, int value)> growthBonuses = null)
     {
         Hp       = data.Hp;
         Attack   = data.Attack;
@@ -45,6 +46,23 @@ public class PawnStats
                     case StatusType.StatMovement: Movement += values[i]; break;
                     case StatusType.StatRange:    Range    += values[i]; break;
                     case StatusType.StatCardCap:  CardCap  += values[i]; break;
+                }
+            }
+        }
+
+        if (growthBonuses != null)
+        {
+            foreach (var (type, value) in growthBonuses)
+            {
+                switch (type)
+                {
+                    case StatusType.StatAtk:      Attack   += value; break;
+                    case StatusType.StatDef:      Armor    += value; break;
+                    case StatusType.StatHp:       Hp       += value; break;
+                    case StatusType.StatShield:   Shield   += value; break;
+                    case StatusType.StatMovement: Movement += value; break;
+                    case StatusType.StatRange:    Range    += value; break;
+                    case StatusType.StatCardCap:  CardCap  += value; break;
                 }
             }
         }

@@ -19,6 +19,9 @@ public class StageManager : MonoSingleton<StageManager>
     private int _stageGoldReward;
     public int StageGoldReward => _stageGoldReward;
 
+    private int _stageExpReward;
+    public int StageExpReward => _stageExpReward;
+
     public IReadOnlyDictionary<int, Actor> UserActors  => _dicUserActor;
     public IReadOnlyDictionary<int, Actor> EnemyActors => _dicEnemyActor;
 
@@ -138,6 +141,12 @@ public class StageManager : MonoSingleton<StageManager>
                             && effectiveMovement > 0;
         if (canShowRange)
             ShowMovementRange(SelectedTile.GridPosition, effectiveMovement, actor.Data?.GetType());
+    }
+
+    public void RefreshMovementRange()
+    {
+        ClearMovementHighlights();
+        RestoreMovementRange();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -332,7 +341,12 @@ public class StageManager : MonoSingleton<StageManager>
                                 if (monster.IsDead)
                                 {
                                     _stageGoldReward += monster.Data.Gold;
-                                    hitTarget.Die(() => CheckBattleResult());
+                                    _stageExpReward  += monster.Data.Exp;
+                                    hitTarget.Die(() =>
+                                    {
+                                        CheckBattleResult();
+                                        RefreshMovementRange();
+                                    });
                                 }
                             });
                         });
@@ -360,13 +374,29 @@ public class StageManager : MonoSingleton<StageManager>
                 case CardEffectType.BuffAttack:
                 case CardEffectType.BuffArmor:
                 case CardEffectType.BuffMovement:
-                    if (targetData is DPawn buffP) buffP.ApplyBuff(effect.EffectType, value, effect.Duration);
+                    if (targetData is DPawn buffP)
+                    {
+                        buffP.ApplyBuff(effect.EffectType, value, effect.Duration);
+                        if (effect.EffectType == CardEffectType.BuffMovement)
+                        {
+                            TurnManager.Instance.AdjustRemainingMovement(targetActor, value);
+                            RefreshMovementRange();
+                        }
+                    }
                     else if (targetData is DMonster buffM) buffM.ApplyBuff(effect.EffectType, value, effect.Duration);
                     break;
                 case CardEffectType.DebuffAttack:
                 case CardEffectType.DebuffArmor:
                 case CardEffectType.DebuffMovement:
-                    if (targetData is DPawn debuffP) debuffP.ApplyBuff(effect.EffectType, -value, effect.Duration);
+                    if (targetData is DPawn debuffP)
+                    {
+                        debuffP.ApplyBuff(effect.EffectType, -value, effect.Duration);
+                        if (effect.EffectType == CardEffectType.DebuffMovement)
+                        {
+                            TurnManager.Instance.AdjustRemainingMovement(targetActor, -value);
+                            RefreshMovementRange();
+                        }
+                    }
                     else if (targetData is DMonster debuffM) debuffM.ApplyBuff(effect.EffectType, -value, effect.Duration);
                     break;
             }
@@ -440,6 +470,7 @@ public class StageManager : MonoSingleton<StageManager>
         _dicUserActor.Clear();
         _dicEnemyActor.Clear();
         _stageGoldReward = 0;
+        _stageExpReward  = 0;
         _reachableTiles.Clear();
         _cardRangeTiles.Clear();
         _radiusPreviewTiles.Clear();

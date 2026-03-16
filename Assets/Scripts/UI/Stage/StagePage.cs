@@ -366,8 +366,9 @@ public class StagePage : PageView
     {
         UIManager.Instance.OpenView<BattleResultPopup>(new BattleResultPopup.BattleResultParam
         {
-            isWin = isWin,
-            goldReward = isWin ? StageManager.Instance.StageGoldReward : 0
+            isWin      = isWin,
+            goldReward = isWin ? StageManager.Instance.StageGoldReward : 0,
+            expReward  = isWin ? StageManager.Instance.StageExpReward  : 0,
         });
     }
 

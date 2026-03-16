@@ -9,6 +9,7 @@ public class BattleResultPopup : PopupView
     {
         public bool isWin;
         public int goldReward;
+        public int expReward;
     }
 
     #region Linker
@@ -40,6 +41,8 @@ public class BattleResultPopup : PopupView
         BattleResultParam resultParam = param as BattleResultParam;
         PlayerManager.Instance.AddGold(resultParam.goldReward);
         PlayerManager.Instance.IncrementLevel();
+        foreach (var pawn in DeckManager.Instance.DeckPawns)
+            pawn.AddExp(resultParam.expReward);
         SceneController.Instance.ChangeScene("LobbyScene");
     }
 
