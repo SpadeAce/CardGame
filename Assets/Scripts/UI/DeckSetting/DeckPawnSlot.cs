@@ -23,6 +23,7 @@ public class DeckPawnSlot : MonoBehaviourEx, IPointerClickHandler
     public int SlotIndex => _slotIndex;
 
     public event Action<DeckPawnSlot> OnRightClick;
+    public event Action<DeckPawnSlot> OnLockedClick;
 
     public void Init(int slotIndex, bool isLocked)
     {
@@ -51,7 +52,9 @@ public class DeckPawnSlot : MonoBehaviourEx, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
-        if (e.button == PointerEventData.InputButton.Right && !_isLocked && !IsEmpty)
+        if (_isLocked && e.button == PointerEventData.InputButton.Left)
+            OnLockedClick?.Invoke(this);
+        else if (e.button == PointerEventData.InputButton.Right && !_isLocked && !IsEmpty)
             OnRightClick?.Invoke(this);
     }
 }

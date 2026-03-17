@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\UI\PawnManage\PawnManagePage.cs" />
     <Compile Include="Assets\Scripts\UI\BattleResult\BattleResultItem.cs" />
     <Compile Include="Assets\Scripts\Tile\TileSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\Notice\NoticePopup.cs" />
     <Compile Include="Assets\Scripts\Core\Spawn.cs" />
     <Compile Include="Assets\Scripts\UI\BattleResult\BattleResultPopup.cs" />
     <Compile Include="Assets\Scripts\UI\DeckSetting\DeckSettingPage.cs" />

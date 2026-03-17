@@ -34,6 +34,8 @@ public class DeckSetting_Pawn : MonoBehaviourEx
             slot.Init(i, locked);
             slot.OnRightClick -= OnSlotRightClick;
             slot.OnRightClick += OnSlotRightClick;
+            slot.OnLockedClick -= OnLockedSlotClick;
+            slot.OnLockedClick += OnLockedSlotClick;
             if (!locked)
                 slot.SetData(DeckManager.Instance.GetDeckPawn(i));
         }
@@ -87,6 +89,19 @@ public class DeckSetting_Pawn : MonoBehaviourEx
         DeckManager.Instance.AssignPawnToDeck(item.Pawn, emptySlot);
         _readySlotList[emptySlot].SetData(item.Pawn);
         RefreshOwnPawns();
+    }
+
+    private void OnLockedSlotClick(DeckPawnSlot slot)
+    {
+        const int upgradeCost = 100;
+        var popup = UIManager.Instance.OpenView<NoticePopup>();
+        popup.Init("슬롯 확장", $"{upgradeCost} 골드를 소모하여\n슬롯을 확장하시겠습니까?", () =>
+        {
+            if (!PlayerManager.Instance.SpendGold(upgradeCost)) return;
+            DeckManager.Instance.ExpandSlot();
+            InitSlots();
+            RefreshOwnPawns();
+        });
     }
 
     private void OnSlotRightClick(DeckPawnSlot slot)

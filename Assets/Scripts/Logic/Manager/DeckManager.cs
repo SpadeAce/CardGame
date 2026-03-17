@@ -11,6 +11,13 @@ public class DeckManager : MonoSingleton<DeckManager>
     private int _openSlotCount = 2;
     public int OpenSlotCount => _openSlotCount;
 
+    public bool ExpandSlot()
+    {
+        if (_openSlotCount >= DeckSlotCount) return false;
+        _openSlotCount++;
+        return true;
+    }
+
     // Stage용 — null 제외 편성 목록
     public IEnumerable<DPawn> DeckPawns => _deckPawnSlots.Where(p => p != null);
 
