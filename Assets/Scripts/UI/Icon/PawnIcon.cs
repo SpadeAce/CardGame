@@ -13,7 +13,7 @@ public class PawnIcon : IconBase
     public void SetData(DPawn pawn)
     {
         _textName.text = pawn.CodeName;
-        _textClass.text = pawn.Data.ClassType.ToString();
+        _textClass.text = TextManager.Instance.Get(pawn.Data.Name);
         _rawIcon.texture = Resources.Load<Texture>(pawn.IconPath);
     }
 }

@@ -47,6 +47,7 @@ public class DeckManager : MonoSingleton<DeckManager>, IResettable
 
     // ── 카드 덱 ───────────────────────────────────────────────
     private readonly List<DCard> _deckCardList = new();
+    public IReadOnlyList<DCard> DeckCards => _deckCardList;
     private readonly List<DCard> _cardPool = new();
     private readonly List<DCard> _discardPool = new();
 

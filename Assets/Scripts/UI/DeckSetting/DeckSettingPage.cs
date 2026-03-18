@@ -59,12 +59,14 @@ public class DeckSettingPage : PageView
     {
         _currentPage = DECK_SETTING_PAGE.PAWN;
         RefreshTab();
+        _pawn.OnOpened();
     }
 
     public void OnClickCardTab()
     {
         _currentPage = DECK_SETTING_PAGE.CARD;
         RefreshTab();
+        _card.OnOpened();
     }
     #endregion Events
 }

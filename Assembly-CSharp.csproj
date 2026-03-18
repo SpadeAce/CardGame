@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\PawnManager.cs" />
     <Compile Include="Assets\Scripts\Data\DataObject\DMonster.cs" />
     <Compile Include="Assets\Scripts\UI\Icon\CardIcon.cs" />
+    <Compile Include="Assets\Scripts\UI\StageSelect\StageSelectItem.cs" />
     <Compile Include="Assets\Scripts\Data\DataObject\DPawn.cs" />
     <Compile Include="Assets\Scripts\UI\DeckSetting\DeckPawnSlot.cs" />
     <Compile Include="Assets\Scripts\UI\StageSelect\StageSelectPage.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\TextManager.cs" />
     <Compile Include="Assets\Scripts\Data\EnumContainer.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\DataManager.cs" />
+    <Compile Include="Assets\Scripts\UI\DeckSetting\DeckCardItem.cs" />
     <Compile Include="Assets\Scripts\Tile\TileObject\TileWall.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\PopupView.cs" />
   </ItemGroup>

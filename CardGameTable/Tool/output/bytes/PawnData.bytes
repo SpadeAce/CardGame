@@ -1,7 +1,10 @@
 
-D
-pawn_scout	정찰병 (@PX`jPrefabs/Actor/Pawn/Pawn_Scout
-Lpawn_assult	돌격병 (08@HPX`jPrefabs/Actor/Pawn/Pawn_Assult
-H
-pawn_heavy	중갑병 (08@PX`jPrefabs/Actor/Pawn/Pawn_Heavy
-Npawn_specialist	특수병 (@PX`j"Prefabs/Actor/Pawn/Pawn_Specialist
+M
+pawn_scouttext_pawn_name_scout (
+@PXjPrefabs/Actor/Pawn/Pawn_Scout
+Vpawn_assulttext_pawn_name_assult (
+08@HPXjPrefabs/Actor/Pawn/Pawn_Assult
+Q
+pawn_heavytext_pawn_name_heavy (08@PXjPrefabs/Actor/Pawn/Pawn_Heavy
+\pawn_specialisttext_pawn_name_specialist (
+@PXj"Prefabs/Actor/Pawn/Pawn_Specialist

@@ -58,7 +58,7 @@ public class ShopPage : PageView
             int row = i / ItemsPerRow;
             int col = i % ItemsPerRow;
             item.GetComponent<RectTransform>().anchoredPosition =
-                new Vector2(-440f + 220f * col, -row * 300f);
+                new Vector2(-440f + 250f * col, -row * 350f);
             item.SetData(cards[i]);
             item.OnBuyItem += OnItemBought;
             _activeItems.Add(item);

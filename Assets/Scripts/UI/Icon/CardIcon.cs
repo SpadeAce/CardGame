@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class CardIcon : IconBase
 {
     #region Link
-    [Linker("Root/Text_Cost")]
+    [Linker("Root/Image_Cost/Text_Cost")]
     public Text _textCost;
+    [Linker("Root/Image_Ammo/Text_Ammo")]
+    public Text _textAmmo;
     [Linker("Root/Text_Name")]
     public Text _textName;
     [Linker("Root/Text_Desc")]
@@ -21,6 +23,7 @@ public class CardIcon : IconBase
         _card = card;
 
         _textCost.text = card.EnergyCost.ToString();
+        _textAmmo.text = card.AmmoCost.ToString();
         _textName.text = TextManager.Instance.Get(card.Name);
         _textDesc.text = TextManager.Instance.Get(card.Desc);
 

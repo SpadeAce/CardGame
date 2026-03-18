@@ -175,7 +175,7 @@ public class PawnManagePage : PageView
         var pawn = _selectedPawnItem.Pawn;
         _rawPawn.texture = Resources.Load<Texture>(pawn.IconPath);
         _textName.text = pawn.CodeName;
-        _textClass.text = pawn.Data.ClassType.ToString();
+        _textClass.text = TextManager.Instance.Get(pawn.Data.Name);
         _textStatHP.text = $"HP: {pawn.HP}";
         _textStatAtk.text = $"ATK: {pawn.Attack}";
         _textStatDef.text = $"DEF: {pawn.Armor}";
