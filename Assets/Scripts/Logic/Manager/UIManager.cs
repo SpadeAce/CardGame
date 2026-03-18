@@ -18,13 +18,18 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField]
     private Canvas _canvasPopup;
 
+    [SerializeField]
+    private HudController _hudController;
+
+    public HudController Hud => _hudController;
+
     private Dictionary<Type, ViewCore> _dicPage = new Dictionary<Type, ViewCore>();
     private Dictionary<Type, ViewCore> _dicPopup = new Dictionary<Type, ViewCore>();
     private Stack<PageView> _pageStack = new Stack<PageView>();
 
     private void Awake()
     {
-
+        _hudController?.Init();
     }
 
     public T OpenView<T>(ViewCore.ViewParam param = null) where T : ViewCore
@@ -121,5 +126,6 @@ public class UIManager : MonoSingleton<UIManager>
         _dicPage.Clear();
         _dicPopup.Clear();
         _pageStack.Clear();
+        _hudController?.ClearAll();
     }
 }

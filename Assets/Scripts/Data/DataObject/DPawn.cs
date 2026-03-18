@@ -174,24 +174,34 @@ public class DPawn : DObject
     public void TakeDamage(int attackPower)
     {
         int net = Mathf.Max(0, attackPower - Armor);
-        if (net <= 0) return;
+        if (net <= 0)
+        {
+            onFloatingText?.Invoke(FloatingTextType.Block, 0);
+            return;
+        }
 
         int absorbed = Mathf.Min(Shield, net);
         Shield -= absorbed;
         net    -= absorbed;
         HP      = Mathf.Max(0, HP - net);
+        onFloatingText?.Invoke(FloatingTextType.Damage, net + absorbed);
         onStatsChanged?.Invoke();
     }
 
     public void Heal(int amount)
     {
+        int before = HP;
         HP = Mathf.Min(HP + amount, Data.Hp);
+        int actual = HP - before;
+        if (actual > 0)
+            onFloatingText?.Invoke(FloatingTextType.Heal, actual);
         onStatsChanged?.Invoke();
     }
 
     public void AddShield(int amount)
     {
         Shield += amount;
+        onFloatingText?.Invoke(FloatingTextType.Shield, amount);
         onStatsChanged?.Invoke();
     }
 
@@ -219,6 +229,14 @@ public class DPawn : DObject
     {
         _buffs.Add(new BuffEntry(type, value, duration));
         ApplyStatDelta(type, value);
+
+        bool isDebuff = type == CardEffectType.DebuffAttack
+                     || type == CardEffectType.DebuffArmor
+                     || type == CardEffectType.DebuffMovement;
+        onFloatingText?.Invoke(
+            isDebuff ? FloatingTextType.Debuff : FloatingTextType.Buff,
+            Mathf.Abs(value));
+
         onStatsChanged?.Invoke();
     }
 
@@ -297,4 +315,5 @@ public class DPawn : DObject
     }
 
     public event System.Action onStatsChanged;
+    public event System.Action<FloatingTextType, int> onFloatingText;
 }

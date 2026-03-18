@@ -145,9 +145,11 @@
     <Compile Include="Assets\Scripts\UI\Info\Component\InfoComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Shop\ShopItem.cs" />
     <Compile Include="Assets\Scripts\UI\Option\Option_Language.cs" />
+    <Compile Include="Assets\Scripts\UI\HUD\HudController.cs" />
     <Compile Include="Assets\Scripts\Data\DataObject\Components\PawnStats.cs" />
     <Compile Include="Assets\Scripts\Generated\GameData.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\NamePresetTable.cs" />
+    <Compile Include="Assets\Scripts\UI\HUD\FloatingText.cs" />
     <Compile Include="Assets\Scripts\Core\Singleton.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\DeckManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\PawnGrowthTable.cs" />

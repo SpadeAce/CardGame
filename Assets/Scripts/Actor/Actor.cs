@@ -15,18 +15,44 @@ public class Actor : TileEntity
     private HUD_Actor _hudActor;
 
     public void Init(DPawn pawn)
-    { 
+    {
         SetData(pawn);
         _hudActor = _spawnHud.Get<HUD_Actor>();
         if (_hudActor != null)
             _hudActor.Init(pawn);
+        pawn.onFloatingText += OnFloatingText;
     }
+
     public void Init(DMonster monster)
     {
         SetData(monster);
         _hudActor = _spawnHud.Get<HUD_Actor>();
         if (_hudActor != null)
             _hudActor.Init(monster);
+        monster.onFloatingText += OnFloatingText;
+    }
+
+    private void OnFloatingText(FloatingTextType type, int value)
+    {
+        string text = type switch
+        {
+            FloatingTextType.Damage => $"-{value}",
+            FloatingTextType.Heal   => $"+{value}",
+            FloatingTextType.Shield => $"+{value}",
+            FloatingTextType.Block  => "BLOCK",
+            FloatingTextType.Buff   => $"▲{value}",
+            FloatingTextType.Debuff => $"▼{value}",
+            _ => value.ToString()
+        };
+        UIManager.Instance.Hud?.ShowFloatingText(type, text, transform.position, transform);
+    }
+
+    private void OnDestroy()
+    {
+        if (Data is DPawn pawn)
+            pawn.onFloatingText -= OnFloatingText;
+        else if (Data is DMonster monster)
+            monster.onFloatingText -= OnFloatingText;
     }
 
     public void SetSpeed(float speed)
