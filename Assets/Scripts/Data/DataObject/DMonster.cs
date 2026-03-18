@@ -133,6 +133,11 @@ public class DMonster : DObject
         }
     }
 
+    public void NotifyMiss()
+    {
+        onFloatingText?.Invoke(FloatingTextType.Miss, 0);
+    }
+
     public bool IsDead => HP <= 0;
 
     public event System.Action onStatsChanged;

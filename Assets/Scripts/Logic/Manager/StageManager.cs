@@ -336,6 +336,15 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
     private IEnumerator ApplyCardEffectsCoroutine(DCard card, Actor caster, Actor targetActor)
     {
         DObject targetData = targetActor?.Data;
+
+        // 명중 판정 (Enemy 타겟 + caster=DPawn + target=DMonster, 카드 당 1회)
+        bool isHit = true;
+        bool isEnemyTarget = card.Data.Target == GameData.TargetType.Enemy;
+        if (isEnemyTarget && caster.Data is DPawn atkPawn && targetData is DMonster)
+        {
+            isHit = UnityEngine.Random.Range(0, 10000) < atkPawn.Accuracy;
+        }
+
         for (int i = 0; i < card.Data.EffectId.Count; i++)
         {
             var effect = DataManager.Instance.CardEffect.Get(card.Data.EffectId[i]);
@@ -350,23 +359,36 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
                         caster.PerformAttack(targetActor, () => attackDone = true);
                         yield return new WaitForSeconds(0.3f);
 
-                        monster.TakeDamage(value);
-
-                        bool hitDone = false;
-                        targetActor.ReceiveHit(caster, () => hitDone = true);
-
-                        yield return new WaitUntil(() => attackDone);
-                        yield return new WaitUntil(() => hitDone);
-
-                        if (monster.IsDead)
+                        if (isHit)
                         {
-                            _stageGoldReward += monster.Data.Gold;
-                            _stageExpReward  += monster.Data.Exp;
-                            bool dieDone = false;
-                            targetActor.Die(() => dieDone = true);
-                            yield return new WaitUntil(() => dieDone);
-                            CheckBattleResult();
-                            RefreshMovementRange();
+                            monster.TakeDamage(value);
+
+                            bool hitDone = false;
+                            targetActor.ReceiveHit(caster, () => hitDone = true);
+
+                            yield return new WaitUntil(() => attackDone);
+                            yield return new WaitUntil(() => hitDone);
+
+                            if (monster.IsDead)
+                            {
+                                _stageGoldReward += monster.Data.Gold;
+                                _stageExpReward  += monster.Data.Exp;
+                                bool dieDone = false;
+                                targetActor.Die(() => dieDone = true);
+                                yield return new WaitUntil(() => dieDone);
+                                CheckBattleResult();
+                                RefreshMovementRange();
+                            }
+                        }
+                        else
+                        {
+                            monster.NotifyMiss();
+
+                            bool evadeDone = false;
+                            targetActor.Evade(caster, () => evadeDone = true);
+
+                            yield return new WaitUntil(() => attackDone);
+                            yield return new WaitUntil(() => evadeDone);
                         }
                     }
                     else if (targetData is DPawn pawn) pawn.TakeDamage(value);
@@ -406,6 +428,7 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
                 case CardEffectType.DebuffAttack:
                 case CardEffectType.DebuffArmor:
                 case CardEffectType.DebuffMovement:
+                    if (!isHit) break;
                     if (targetData is DPawn debuffP)
                     {
                         debuffP.ApplyBuff(effect.EffectType, -value, effect.Duration);

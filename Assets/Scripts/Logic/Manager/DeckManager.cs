@@ -74,7 +74,7 @@ public class DeckManager : MonoSingleton<DeckManager>, IResettable
         AddCard(new DCard(10004));
 
         PawnManager.Instance.AddPawn(new DPawn(1));
-        PawnManager.Instance.AddPawn(new DPawn(2));
+        PawnManager.Instance.AddPawn(new DPawn(1));
 
         ItemManager.Instance.AddEquip(new DEquipment(10001));
         ItemManager.Instance.AddEquip(new DEquipment(10002));

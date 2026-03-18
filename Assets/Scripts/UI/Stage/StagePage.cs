@@ -29,6 +29,8 @@ public class StagePage : PageView
 
     [Linker("Root/Image_EnemyTarget")]
     public GameObject _goEnemyTarget;
+    [Linker("Root/Image_EnemyTarget/Text_Accuracy")]
+    public Text _textEnemyAccuracy;
     [Linker("Root/Image_AllyTarget")]
     public GameObject _goAllyTarget;
     #endregion Links
@@ -295,9 +297,27 @@ public class StagePage : PageView
                     StageManager.Instance.ShowRadiusPreview(hovered, card);
                 else
                     StageManager.Instance.ClearRadiusPreview();
+
+                // 명중율 텍스트 표시 (Enemy 타겟 전용 + 호버 대상이 DMonster)
+                if (card.Data.Target == TargetType.Enemy && hovered != null
+                    && hovered.Slot?.SlotEntity is Actor hoveredActor
+                    && hoveredActor.Data is DMonster
+                    && _casterActor?.Data is DPawn casterPawn)
+                {
+                    int acc = Mathf.Clamp(casterPawn.Accuracy, 0, 10000);
+                    _textEnemyAccuracy.gameObject.SetActive(true);
+                    _textEnemyAccuracy.text = $"{acc / 100}%";
+                }
+                else
+                {
+                    _textEnemyAccuracy.gameObject.SetActive(false);
+                }
             }
             else
+            {
                 StageManager.Instance.ClearRadiusPreview();
+                _textEnemyAccuracy.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -313,6 +333,7 @@ public class StagePage : PageView
         icon.SetVisible(true);
         _goEnemyTarget.SetActive(false);
         _goAllyTarget.SetActive(false);
+        _textEnemyAccuracy.gameObject.SetActive(false);
         StageManager.Instance.ClearCardRange();
         StageManager.Instance.ClearRadiusPreview();
         StageManager.Instance.RestoreMovementRange();

@@ -28,10 +28,10 @@ public class BattleResultPopup : PopupView
     public Text _textRewardExp;
     [Linker("Root/RewardCard")]
     public GameObject _goRewardCard;
-    [Linker("Root/RewardCard/BattleResultItem_1",
-    "Root/RewardCard/BattleResultItem_2",
-    "Root/RewardCard/BattleResultItem_3")]
-    public List<BattleResultItem> _rewardCardList = new List<BattleResultItem>();
+    [Linker("Root/RewardCard/Spawn_Reward_1",
+    "Root/RewardCard/Spawn_Reward_2",
+    "Root/RewardCard/Spawn_Reward_3")]
+    public List<Spawn> _spawnRewardList = new List<Spawn>();
     #endregion Linker
 
     private int _selectedIndex = -1;
@@ -79,9 +79,9 @@ public class BattleResultPopup : PopupView
 
         _rewardCardIds = PickWeightedCards(rewardData, 3);
 
-        for (int i = 0; i < _rewardCardList.Count; i++)
+        for (int i = 0; i < _spawnRewardList.Count; i++)
         {
-            var item = _rewardCardList[i];
+            var item = _spawnRewardList[i].Get<BattleResultItem>();
 
             if (i < _rewardCardIds.Count)
             {
@@ -147,15 +147,15 @@ public class BattleResultPopup : PopupView
         if (_selectedIndex == index)
         {
             _selectedIndex = -1;
-            _rewardCardList[index].SetSelected(false);
+            _spawnRewardList[index].Get<BattleResultItem>().SetSelected(false);
         }
         else
         {
             if (_selectedIndex >= 0)
-                _rewardCardList[_selectedIndex].SetSelected(false);
+                _spawnRewardList[_selectedIndex].Get<BattleResultItem>().SetSelected(false);
 
             _selectedIndex = index;
-            _rewardCardList[index].SetSelected(true);
+            _spawnRewardList[index].Get<BattleResultItem>().SetSelected(true);
         }
     }
 

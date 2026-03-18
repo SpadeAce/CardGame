@@ -40,6 +40,7 @@ public class Actor : TileEntity
             FloatingTextType.Heal   => $"+{value}",
             FloatingTextType.Shield => $"+{value}",
             FloatingTextType.Block  => "BLOCK",
+            FloatingTextType.Miss   => "MISS",
             FloatingTextType.Buff   => $"▲{value}",
             FloatingTextType.Debuff => $"▼{value}",
             _ => value.ToString()
@@ -110,6 +111,33 @@ public class Actor : TileEntity
 
         yield return null;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit"))
+            yield return null;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            yield return null;
+
+        onComplete?.Invoke();
+    }
+
+    /// <summary>
+    /// 공격자를 바라보고 "Evade" 애니메이터 스테이트를 재생한다.
+    /// 애니메이션이 끝나면 onComplete를 호출한다.
+    /// </summary>
+    public void Evade(Actor attacker, System.Action onComplete = null)
+    {
+        StartCoroutine(EvadeCoroutine(attacker, onComplete));
+    }
+
+    private IEnumerator EvadeCoroutine(Actor attacker, System.Action onComplete)
+    {
+        Vector3 dir = attacker.transform.position - transform.position;
+        dir.y = 0f;
+        if (dir.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(dir);
+
+        animator.Play("Evade");
+
+        yield return null;
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Evade"))
             yield return null;
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             yield return null;

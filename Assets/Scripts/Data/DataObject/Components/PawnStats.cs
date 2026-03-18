@@ -17,6 +17,7 @@ public class PawnStats
     public int Sight    { get; private set; }
     public int Ammo     { get; private set; }
     public int CardCap  { get; private set; }
+    public int Accuracy { get; private set; }
 
     public void Recalculate(PawnData data, IReadOnlyList<DEquipment> equips,
         IReadOnlyList<(GameData.StatusType type, int value)> growthBonuses = null)
@@ -28,8 +29,9 @@ public class PawnStats
         Movement = data.Movement;
         Range    = data.Range;
         Sight    = data.Sight;
-        Ammo     = data.ActingPower;
+        Ammo     = data.Ammo;
         CardCap  = 0;
+        Accuracy = data.Accuracy;
 
         foreach (var equip in equips)
         {
@@ -46,6 +48,8 @@ public class PawnStats
                     case StatusType.StatMovement: Movement += values[i]; break;
                     case StatusType.StatRange:    Range    += values[i]; break;
                     case StatusType.StatCardCap:  CardCap  += values[i]; break;
+                    case StatusType.StatAccuracy: Accuracy += values[i]; break;
+                    case StatusType.StatAmmoCap:  Ammo     += values[i]; break;
                 }
             }
         }
@@ -63,6 +67,8 @@ public class PawnStats
                     case StatusType.StatMovement: Movement += value; break;
                     case StatusType.StatRange:    Range    += value; break;
                     case StatusType.StatCardCap:  CardCap  += value; break;
+                    case StatusType.StatAccuracy: Accuracy += value; break;
+                    case StatusType.StatAmmoCap:  Ammo     += value; break;
                 }
             }
         }

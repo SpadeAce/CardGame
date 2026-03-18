@@ -185,8 +185,9 @@ message PawnData {
   int32 attack = 9;  // 공격력
   int32 range = 10;  // 사거리
   int32 sight = 11;  // 시야
-  int32 actingPower = 12;  // 행동력
-  string prefabPath = 13;  // 리소스경로
+  int32 accuracy = 12;  // 정확도(만분율)
+  int32 ammo = 13;  // 탄약
+  string prefabPath = 14;  // 리소스경로
 }
 
 message PawnDataTable {

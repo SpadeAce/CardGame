@@ -19,6 +19,7 @@ public class DPawn : DObject
     public int Sight {get;private set;}
 
     public int Ammo {get;private set;}
+    public int Accuracy {get;private set;}
 
     private readonly List<BuffEntry> _buffs = new List<BuffEntry>();
     public IReadOnlyList<BuffEntry> Buffs => _buffs;
@@ -166,6 +167,7 @@ public class DPawn : DObject
         Range    = Stats.Range;
         Sight    = Stats.Sight;
         Ammo     = Stats.Ammo;
+        Accuracy = Stats.Accuracy;
     }
 
     /// <summary>
@@ -215,7 +217,7 @@ public class DPawn : DObject
 
     public void RestoreAmmo()
     {
-        Ammo = Data.ActingPower;
+        Ammo = Stats.Ammo;
         onStatsChanged?.Invoke();
     }
 

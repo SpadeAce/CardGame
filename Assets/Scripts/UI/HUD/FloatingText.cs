@@ -9,7 +9,8 @@ public enum FloatingTextType
     Shield,
     Buff,
     Debuff,
-    Block
+    Block,
+    Miss
 }
 
 [AssetPath("Prefabs/UI/HUD/FloatingText")]
@@ -168,6 +169,7 @@ public class FloatingText : MonoBehaviourEx
         FloatingTextType.Buff   => new Color(1f, 0.8f, 0f),
         FloatingTextType.Debuff => new Color(0.7f, 0.3f, 0.9f),
         FloatingTextType.Block  => Color.gray,
+        FloatingTextType.Miss   => Color.gray,
         _ => Color.white,
     };
 }
