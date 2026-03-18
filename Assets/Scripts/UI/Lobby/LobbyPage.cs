@@ -71,7 +71,7 @@ public class LobbyPage : PageView
 
     public void OnClickExit()
     {
-        SceneController.Instance.ChangeScene("TitleScene");
+        UIManager.Instance.OpenView<PausePopup>();
     }
     #endregion Events
 }

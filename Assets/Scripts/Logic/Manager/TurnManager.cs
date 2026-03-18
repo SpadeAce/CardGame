@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TurnManager : MonoSingleton<TurnManager>
+public class TurnManager : MonoSingleton<TurnManager>, IResettable
 {
     public enum TurnPhase { Pawn, Monster }
 
@@ -36,6 +36,19 @@ public class TurnManager : MonoSingleton<TurnManager>
     }
 
     public void SetTurnLimit(int limit) => TurnLimit = limit;
+
+    public void ResetAll()
+    {
+        StopAllCoroutines();
+        CurrentPhase = TurnPhase.Pawn;
+        CurrentTurn = 0;
+        TurnLimit = 0;
+        SharedActingPower = 0;
+        _remainingMovement.Clear();
+
+        onTurnChanged = null;
+        onSharedActingPowerChanged = null;
+    }
 
     private readonly Dictionary<Actor, int> _remainingMovement = new Dictionary<Actor, int>();
 

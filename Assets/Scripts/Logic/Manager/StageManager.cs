@@ -5,7 +5,7 @@ using System.Linq;
 using SA;
 using GameData;
 
-public class StageManager : MonoSingleton<StageManager>
+public class StageManager : MonoSingleton<StageManager>, IResettable
 {
     Dictionary<int, Actor> _dicUserActor = new Dictionary<int, Actor>();
     Dictionary<int, Actor> _dicEnemyActor = new Dictionary<int, Actor>();
@@ -463,6 +463,27 @@ public class StageManager : MonoSingleton<StageManager>
         {
             LoadStageDefault();
         }
+    }
+
+    public void ResetAll()
+    {
+        foreach (var actor in _dicUserActor.Values)
+            if (actor != null) Destroy(actor.gameObject);
+        foreach (var actor in _dicEnemyActor.Values)
+            if (actor != null) Destroy(actor.gameObject);
+
+        _dicUserActor.Clear();
+        _dicEnemyActor.Clear();
+        _stageGoldReward = 0;
+        _stageExpReward = 0;
+        _reachableTiles.Clear();
+        _cardRangeTiles.Clear();
+        _radiusPreviewTiles.Clear();
+        SelectedTile = null;
+        SelectedObject = null;
+
+        onSelectedChanged = null;
+        onBattleEnd = null;
     }
 
     private void ResetStageState()

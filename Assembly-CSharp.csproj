@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\UI\Icon\CardIcon.cs" />
     <Compile Include="Assets\Scripts\Data\DataObject\DPawn.cs" />
     <Compile Include="Assets\Scripts\UI\DeckSetting\DeckPawnSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\StageSelect\StageSelectPage.cs" />
     <Compile Include="Assets\Scripts\Logic\Scene\StageScript.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TableData\ShopTable.cs" />
     <Compile Include="Assets\Scripts\Data\EntityCatalogEntry.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Assets\Scripts\UI\Lobby\LobbyPage.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\PageView.cs" />
+    <Compile Include="Assets\Scripts\Core\IResettable.cs" />
     <Compile Include="Assets\Scripts\UI\Info\Preset\PawnInfoPreset.cs" />
     <Compile Include="Assets\Scripts\UI\Option\Option_Information.cs" />
     <Compile Include="Assets\Scripts\Tile\EdgeTileKey.cs" />

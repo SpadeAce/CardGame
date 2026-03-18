@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ItemManager : MonoSingleton<ItemManager>
+public class ItemManager : MonoSingleton<ItemManager>, IResettable
 {
     private readonly List<DItem> _itemList = new();
     private readonly List<DEquipment> _equipList = new();
@@ -10,4 +10,10 @@ public class ItemManager : MonoSingleton<ItemManager>
 
     public void AddEquip(DEquipment equip)
         => _equipList.Add(equip);
+
+    public void ResetAll()
+    {
+        _itemList.Clear();
+        _equipList.Clear();
+    }
 }

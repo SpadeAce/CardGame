@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DeckManager : MonoSingleton<DeckManager>
+public class DeckManager : MonoSingleton<DeckManager>, IResettable
 {
     // ── 덱 편성 슬롯 (null = 빈 슬롯) ────────────────────────
     private const int DeckSlotCount = 5;
@@ -162,6 +162,20 @@ public class DeckManager : MonoSingleton<DeckManager>
         _cardPool.AddRange(_discardPool);
         _discardPool.Clear();
         ShufflePool(_cardPool);
+    }
+
+    public void ResetAll()
+    {
+        for (int i = 0; i < _deckPawnSlots.Length; i++)
+            _deckPawnSlots[i] = null;
+        _openSlotCount = 2;
+
+        _deckCardList.Clear();
+        _cardPool.Clear();
+        _discardPool.Clear();
+        handCardList.Clear();
+
+        onHandChanged = null;
     }
 
     private void ShufflePool(List<DCard> pool)

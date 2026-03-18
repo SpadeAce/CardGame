@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PawnIcon : IconBase
 {  
-      #region Link
+    #region Link
     [Linker("Root/Text_Name")]
     public Text _textName;
     [Linker("Root/Text_Class")]

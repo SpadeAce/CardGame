@@ -2,7 +2,7 @@
 /// 플레이어 상태(난이도 레벨, Gold)를 관리하는 매니저.
 /// DontDestroyOnLoad 싱글톤으로 게임 전체에서 상태를 유지한다.
 /// </summary>
-public class PlayerManager : MonoSingleton<PlayerManager>
+public class PlayerManager : MonoSingleton<PlayerManager>, IResettable
 {
     private int _difficultyLevel = 1;
     private int _gold = 1000;
@@ -28,5 +28,11 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public void AddGold(int amount)
     {
         _gold += amount;
+    }
+
+    public void ResetAll()
+    {
+        _difficultyLevel = 1;
+        _gold = 1000;
     }
 }

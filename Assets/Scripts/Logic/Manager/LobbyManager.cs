@@ -3,7 +3,7 @@ using System.Linq;
 using GameData;
 using UnityEngine;
 
-public class LobbyManager : MonoSingleton<LobbyManager>
+public class LobbyManager : MonoSingleton<LobbyManager>, IResettable
 {
     // ── Shop ──────────────────────────────────────────────
     private const int ShopMaxItemCount = 10;
@@ -66,6 +66,13 @@ public class LobbyManager : MonoSingleton<LobbyManager>
     /// </summary>
     public void ResetForNextStage()
     {
+        _shopCards = null;
+        _recruitPawns = null;
+    }
+
+    public void ResetAll()
+    {
+        _shopLevel = 1;
         _shopCards = null;
         _recruitPawns = null;
     }

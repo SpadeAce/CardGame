@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -65,6 +66,7 @@ public class StageScript : SceneBase
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             if (_stagePage != null && _stagePage.IsCardDragging) return;
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
             HandleTileClick(Mouse.current.position.ReadValue());
         }
     }

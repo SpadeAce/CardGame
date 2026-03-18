@@ -6,7 +6,7 @@ using UnityEngine;
 /// 사각형 타일맵 관리자
 /// X,Z 평면 기반 좌표 시스템 사용 (Vector2Int: x→X축, y→Z축)
 /// </summary>
-public class TileManager : MonoSingleton<TileManager>
+public class TileManager : MonoSingleton<TileManager>, IResettable
 {
     #region Constants
     
@@ -231,6 +231,11 @@ public class TileManager : MonoSingleton<TileManager>
                 result.Add(tile);
         }
         return result;
+    }
+
+    public void ResetAll()
+    {
+        ClearAllTiles();
     }
 
     /// <summary>

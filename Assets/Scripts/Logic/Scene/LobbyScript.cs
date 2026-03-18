@@ -12,6 +12,9 @@ public class LobbyScript : SceneBase
 
     public override void OnEnterScene()
     {
+        if (PawnManager.Instance.Pawns.Count == 0)
+            DeckManager.Instance.InitTestData();
+
         _lobbyPage = UIManager.Instance.OpenView<LobbyPage>();
     }
 }

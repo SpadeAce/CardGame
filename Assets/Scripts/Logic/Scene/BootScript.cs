@@ -13,7 +13,6 @@ public class BootScript : SceneBase
     {
         DataManager.Instance.LoadAll();
         TextManager.Instance.Initialize();
-        DeckManager.Instance.InitTestData();
         SceneController.Instance.ChangeScene("TitleScene");
     }
 

@@ -8,7 +8,8 @@ public class PausePopup : PopupView
     #region Linker
     [Linker("Root/Button_Continue")]
     public Button _buttonContinue;
-
+    [Linker("Root/Button_Option")]
+    public Button _buttonOption;
     [Linker("Root/Button_Exit")]
     public Button _buttonExit;
     #endregion Linker
@@ -17,6 +18,9 @@ public class PausePopup : PopupView
     {
         _buttonContinue.onClick.RemoveAllListeners();
         _buttonContinue.onClick.AddListener(OnClickContinue);
+
+        _buttonOption.onClick.RemoveAllListeners();
+        _buttonOption.onClick.AddListener(OnClickOption);
 
         _buttonExit.onClick.RemoveAllListeners();
         _buttonExit.onClick.AddListener(OnClickExit);
@@ -28,13 +32,20 @@ public class PausePopup : PopupView
         Close();
     }
 
+    public void OnClickOption()
+    {        
+        UIManager.Instance.OpenView<OptionPopup>();
+    }
+
     public void OnClickExit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneController.Instance.ReturnToTitle();
+
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;
+//#else
+//        Application.Quit();
+//#endif
     }
     #endregion Events
 }
