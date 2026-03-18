@@ -65,6 +65,7 @@ public class StageScript : SceneBase
     {
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
+            if (StageManager.Instance.IsBusy) return;
             if (_stagePage != null && _stagePage.IsCardDragging) return;
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
             HandleTileClick(Mouse.current.position.ReadValue());

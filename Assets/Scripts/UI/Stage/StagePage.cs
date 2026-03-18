@@ -230,6 +230,7 @@ public class StagePage : PageView
 
     private void StartCardDrag(BattleCard icon, PointerEventData eventData, DPawn owner)
     {
+        if (StageManager.Instance.IsBusy) return;
         SquareTile selectedTile = StageManager.Instance.SelectedTile;
         if (selectedTile == null || selectedTile.Slot == null) return;
         Actor caster = selectedTile.Slot.SlotEntity as Actor;

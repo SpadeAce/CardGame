@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SA;
@@ -12,6 +13,9 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
     HashSet<SquareTile> _reachableTiles = new HashSet<SquareTile>();
     HashSet<SquareTile> _cardRangeTiles  = new HashSet<SquareTile>();
     HashSet<SquareTile> _radiusPreviewTiles = new HashSet<SquareTile>();
+
+    private bool _isBusy;
+    public bool IsBusy => _isBusy;
 
     public SquareTile SelectedTile { get; private set; }
     public DObject SelectedObject { get; private set; }
@@ -228,7 +232,8 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
         if (caster.Data is DPawn p) SpendCardCost(card, p);
         if (cardOwner != null) cardOwner.UsePawnCard(card);
         else DeckManager.Instance.UseCard(card);
-        ApplyCardEffects(card, caster, caster);
+        _isBusy = true;
+        StartCoroutine(ApplyAndUnlock(card, caster, caster));
     }
 
     public bool TryUseCard(DCard card, Actor caster, SquareTile targetTile, DPawn cardOwner = null)
@@ -252,7 +257,8 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
             if (caster.Data is DPawn ep) SpendCardCost(card, ep);
             if (cardOwner != null) cardOwner.UsePawnCard(card);
             else DeckManager.Instance.UseCard(card);
-            ApplyCardEffectsWithRadius(card, caster, targetTile);
+            _isBusy = true;
+            StartCoroutine(ApplyWithRadiusAndUnlock(card, caster, targetTile));
             return true;
         }
         else if (card.Data.Target == TargetType.Ground)
@@ -261,7 +267,8 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
             if (caster.Data is DPawn gp) SpendCardCost(card, gp);
             if (cardOwner != null) cardOwner.UsePawnCard(card);
             else DeckManager.Instance.UseCard(card);
-            ApplyCardEffectsWithRadius(card, caster, targetTile);
+            _isBusy = true;
+            StartCoroutine(ApplyWithRadiusAndUnlock(card, caster, targetTile));
             return true;
         }
         else if (card.Data.Target == TargetType.Ally)
@@ -272,17 +279,25 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
             if (caster.Data is DPawn ap) SpendCardCost(card, ap);
             if (cardOwner != null) cardOwner.UsePawnCard(card);
             else DeckManager.Instance.UseCard(card);
-            ApplyCardEffectsWithRadius(card, caster, targetTile);
+            _isBusy = true;
+            StartCoroutine(ApplyWithRadiusAndUnlock(card, caster, targetTile));
             return true;
         }
         return false;
     }
 
-    private void ApplyCardEffectsWithRadius(DCard card, Actor caster, SquareTile centerTile)
+    private IEnumerator ApplyAndUnlock(DCard card, Actor caster, Actor targetActor)
+    {
+        yield return ApplyCardEffectsCoroutine(card, caster, targetActor);
+        _isBusy = false;
+    }
+
+    private IEnumerator ApplyWithRadiusAndUnlock(DCard card, Actor caster, SquareTile centerTile)
     {
         var targets = GetRadiusTargets(centerTile, card);
         foreach (var target in targets)
-            ApplyCardEffects(card, caster, target);
+            yield return ApplyCardEffectsCoroutine(card, caster, target);
+        _isBusy = false;
     }
 
     private List<Actor> GetRadiusTargets(SquareTile centerTile, DCard card)
@@ -318,7 +333,7 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
         return results;
     }
 
-    private void ApplyCardEffects(DCard card, Actor caster, Actor targetActor)
+    private IEnumerator ApplyCardEffectsCoroutine(DCard card, Actor caster, Actor targetActor)
     {
         DObject targetData = targetActor?.Data;
         for (int i = 0; i < card.Data.EffectId.Count; i++)
@@ -331,25 +346,28 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
                 case CardEffectType.Damage:
                     if (targetActor != null && targetData is DMonster monster)
                     {
-                        int dmgValue = value;
-                        Actor hitTarget = targetActor;
-                        caster.PerformAttack(targetActor, () =>
+                        bool attackDone = false;
+                        caster.PerformAttack(targetActor, () => attackDone = true);
+                        yield return new WaitForSeconds(0.3f);
+
+                        monster.TakeDamage(value);
+
+                        bool hitDone = false;
+                        targetActor.ReceiveHit(caster, () => hitDone = true);
+
+                        yield return new WaitUntil(() => attackDone);
+                        yield return new WaitUntil(() => hitDone);
+
+                        if (monster.IsDead)
                         {
-                            monster.TakeDamage(dmgValue);
-                            hitTarget.ReceiveHit(caster, () =>
-                            {
-                                if (monster.IsDead)
-                                {
-                                    _stageGoldReward += monster.Data.Gold;
-                                    _stageExpReward  += monster.Data.Exp;
-                                    hitTarget.Die(() =>
-                                    {
-                                        CheckBattleResult();
-                                        RefreshMovementRange();
-                                    });
-                                }
-                            });
-                        });
+                            _stageGoldReward += monster.Data.Gold;
+                            _stageExpReward  += monster.Data.Exp;
+                            bool dieDone = false;
+                            targetActor.Die(() => dieDone = true);
+                            yield return new WaitUntil(() => dieDone);
+                            CheckBattleResult();
+                            RefreshMovementRange();
+                        }
                     }
                     else if (targetData is DPawn pawn) pawn.TakeDamage(value);
                     break;
@@ -476,6 +494,7 @@ public class StageManager : MonoSingleton<StageManager>, IResettable
         _dicEnemyActor.Clear();
         _stageGoldReward = 0;
         _stageExpReward = 0;
+        _isBusy = false;
         _reachableTiles.Clear();
         _cardRangeTiles.Clear();
         _radiusPreviewTiles.Clear();

@@ -284,28 +284,33 @@ public class TurnManager : MonoSingleton<TurnManager>, IResettable
     /// </summary>
     private IEnumerator ExecuteAttack(Actor attacker, Actor target, int attackPower)
     {
-        // 1. 공격 모션
-        bool done = false;
-        attacker.PerformAttack(target, () => done = true);
-        yield return new WaitUntil(() => done);
+        // 1. 공격 모션 시작
+        bool attackDone = false;
+        attacker.PerformAttack(target, () => attackDone = true);
 
-        // 2. 피해 적용
+        // 2. 고정 딜레이 후 피해 적용 (모션 중간 타격)
+        yield return new WaitForSeconds(0.3f);
+
         if (target.Data is DPawn pawn)
             pawn.TakeDamage(attackPower);
 
-        // 3. GetHit 모션
-        done = false;
-        target.ReceiveHit(attacker, () => done = true);
-        yield return new WaitUntil(() => done);
+        // 3. 피격 모션 (공격 모션과 병렬)
+        bool hitDone = false;
+        target.ReceiveHit(attacker, () => hitDone = true);
+
+        // 공격 모션 잔여 대기
+        yield return new WaitUntil(() => attackDone);
+        // 피격 모션 대기
+        yield return new WaitUntil(() => hitDone);
 
         // 4. 사망 처리
         bool isDead = (target.Data is DPawn p && p.IsDead)
                    || (target.Data is DMonster m && m.IsDead);
         if (isDead)
         {
-            done = false;
-            target.Die(() => done = true);
-            yield return new WaitUntil(() => done);
+            bool dieDone = false;
+            target.Die(() => dieDone = true);
+            yield return new WaitUntil(() => dieDone);
             StageManager.Instance.CheckBattleResult();
         }
     }
